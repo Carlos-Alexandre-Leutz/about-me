@@ -1,7 +1,11 @@
 <template>
   <div class="d-flex menu">
-    <div id="esquerda" class="sideBar abrir">
-      <div class="d-flex justify-content-center">
+    <div
+      id="esquerda"
+      class="sideBar"
+      :class="[sidebarOpen ? 'abrir' : 'fexar']"
+    >
+      <div class="d-flex justify-content-center sid-bar-menu">
         <div class="btn-group">
           <button @click="changeLanguage('en')" class="btn btn-light">
             <i class="flag-icon flag-icon-us"></i> {{ $t("english") }}
@@ -11,9 +15,9 @@
           </button>
         </div>
       </div>
-      <div class="icoenMenu iconeDentro">
+      <div @click="toggleMenu()" class="icoenMenu iconeDentro">
         <span class="menuH">
-          <img src="imagens/menu.png" alt="" />
+          <img src="../assets/imagens/menu.png" alt="" />
         </span>
       </div>
       <span class="login100-form-avatar">
@@ -56,7 +60,7 @@
           aria-labelledby="headingOne"
           data-parent="#accordionExample"
         >
-          <router-link to="/" class="linkPages">
+          <router-link to="/" class="linkPages" @click="closeSideBar()">
             <div class="itensMenu">
               <svg
                 class="m-r-5 m-l-20 bi bi-code-square"
@@ -75,10 +79,14 @@
                   d="M6.854 4.646a.5.5 0 0 1 0 .708L4.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0zm2.292 0a.5.5 0 0 0 0 .708L11.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0z"
                 />
               </svg>
-              {{ $t("skills") }}
+              {{ $t("skills") }}.
             </div>
           </router-link>
-          <router-link to="/graduation" class="linkPages">
+          <router-link
+            to="/graduation"
+            class="linkPages"
+            @click="closeSideBar()"
+          >
             <div class="itensMenu">
               <svg
                 class="m-r-5 m-l-20 bi bi-patch-check"
@@ -133,7 +141,11 @@
           data-parent="#accordionExample"
         >
           <div>
-            <router-link to="/portfolio" class="linkPages">
+            <router-link
+              to="/portfolio"
+              class="linkPages"
+              @click="closeSideBar()"
+            >
               <div class="itensMenu">
                 <svg
                   class="m-r-5 m-l-20 bi bi-question-octagon"
@@ -154,7 +166,11 @@
                 {{ $t("myPortfolio") }}
               </div>
             </router-link>
-            <router-link to="/projects" class="linkPages">
+            <router-link
+              to="/projects"
+              class="linkPages"
+              @click="closeSideBar()"
+            >
               <div class="itensMenu">
                 <svg
                   class="m-r-5 m-l-20 bi bi-server"
@@ -207,7 +223,11 @@
           data-parent="#accordionExample"
         >
           <div>
-            <router-link to="/contact" class="linkPages">
+            <router-link
+              to="/contact"
+              class="linkPages"
+              @click="closeSideBar()"
+            >
               <div class="itensMenu">
                 <svg
                   class="m-r-5 m-l-20 bi bi-envelope-fill"
@@ -264,7 +284,7 @@
 export default {
   data() {
     return {
-      sidebarOpen: false,
+      sidebarOpen: true,
       menuIconInside: true,
       scrollActive: false,
     };
@@ -284,15 +304,11 @@ export default {
         this.scrollActive = false;
       }
     },
-    handleButtonClick(index) {
-      // Lógica para lidar com o clique nos elementos com classes '1', '2' ou '3'
-      if (index === 1) {
-        // Lógica para o clique no elemento com a classe '1'
-      } else if (index === 2) {
-        // Lógica para o clique no elemento com a classe '2'
-      } else if (index === 3) {
-        // Lógica para o clique no elemento com a classe '3'
-      }
+    toggleMenu() {
+      this.sidebarOpen = !this.sidebarOpen;
+    },
+    closeSideBar() {
+      this.sidebarOpen = false;
     },
   },
   created() {
@@ -449,6 +465,9 @@ a:hover {
     transition: 0.2s;
     left: 0px !important;
     position: fixed;
+  }
+  .sid-bar-menu {
+    margin-left: 45px;
   }
 }
 </style>
